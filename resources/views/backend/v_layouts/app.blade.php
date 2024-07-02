@@ -45,24 +45,21 @@
                         <span class="fe fe-grid fe-16"></span>
                     </a>
                 </li>
-                <li class="nav-item nav-notif">
-                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
-                        <span class="fe fe-bell fe-16"></span>
-                        <span class="dot dot-md bg-success"></span>
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="avatar avatar-sm mt-2">
-                            <img src="{{ asset('backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activities</a>
-                    </div>
-                </li>
+    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="avatar avatar-sm mt-2">
+            <img src="{{ asset('backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
+        </span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">Profile</a>
+        <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
+            @csrf
+            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Logout</button>
+        </form>
+    </div>
+</li>
+
             </ul>
         </nav>
         <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
@@ -85,18 +82,8 @@
                 <ul class="navbar-nav flex-fill w-100 mb-2">
 
                 </ul>
-                <p class="text-muted nav-heading mt-4 mb-1">
-                    <span>Components</span>
-                </p>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
 
-                    <li class="nav-item w-100">
-                        <a class="nav-link" href="widgets.html">
-                            <i class="fe fe-layers fe-16"></i>
-                            <span class="ml-3 item-text">Widgets</span>
-                            <span class="badge badge-pill badge-primary">New</span>
-                        </a>
-                    </li>
+                <ul class="navbar-nav flex-fill w-100 mb-2">
 
 
                 </ul>
@@ -119,13 +106,6 @@
                     </li>
 
                     <li class="nav-item w-100">
-                        <a class="nav-link" href="{{ route('akun.index') }}">
-                            <i class="fe fe-24 fe-bookmark"></i>
-                            <span class="ml-3 item-text">Akun</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item w-100">
                         <a class="nav-link" href="{{ route('customer.index') }}">
                             <i class="fe fe-24 fe-users"></i>
                             <span class="ml-3 item-text">Customer</span>
@@ -143,34 +123,23 @@
                             <span class="ml-3 item-text">Produk</span>
                         </a>
                     </li>
-                    <!-- Dropdown Transaksi -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fe fe-24 fe-dollar-sign"></i>
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="{{ route('transaksi.index') }}">
+                            <i class="fe fe-24 fe-box"></i>
                             <span class="ml-3 item-text">Transaksi</span>
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('transaksi.index', ['jenis' => 'kalung']) }}">Kalung</a>
-                            <a class="dropdown-item" href="{{ route('transaksi.index', ['jenis' => 'cincin']) }}">Cincin</a>
-                            <a class="dropdown-item" href="{{ route('transaksi.index', ['jenis' => 'gelang']) }}">Gelang</a>
-                            <a class="dropdown-item" href="{{ route('transaksi.index', ['jenis' => 'anting']) }}">Anting</a>
-                            <!-- Tambahkan item dropdown sesuai kebutuhan -->
-                        </div>
                     </li>
-                    <!-- Dropdown Transaksi end -->
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="{{ route('pembayaran.index') }}">
+                            <i class="fe fe-24 fe-box"></i>
+                            <span class="ml-3 item-text">Pembayaran</span>
+                        </a>
+                    </li>
 
                 </ul>
-                <p class="text-muted nav-heading mt-4 mb-1">
-                    <span>Documentation</span>
-                </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
 
                 </ul>
-                <div class="btn-box w-100 mt-4 mb-1">
-                    <a href="https://themeforest.net/item/tinydash-bootstrap-html-admin-dashboard-template/27511269" target="_blank" class="btn mb-2 btn-primary btn-lg btn-block">
-                        <i class="fe fe-shopping-cart fe-12 mx-2"></i><span class="small">Buy now</span>
-                    </a>
-                </div>
             </nav>
         </aside>
         <main role="main" class="main-content">

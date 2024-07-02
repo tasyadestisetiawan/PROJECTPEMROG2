@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('total_harga', 15, 2)->default(0);
             $table->date('tanggal')->nullable();
             $table->timestamps();
-
             $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
             $table->foreign('produk_id')->references('id')->on('produk')->onDelete('cascade');
         });

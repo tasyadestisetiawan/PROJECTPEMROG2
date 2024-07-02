@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>Toko Emas MELTA</title>
+    <title>TOKO EMAS HIDUP BSI</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/simplebar.css') }}">
     <!-- Fonts CSS -->
@@ -42,7 +42,7 @@
                             </g>
                         </svg>
                     </a>
-                    <h1 class="h6 mb-3">Penjualan Toko Emas MELTA</h1>
+                    <h1 class="h6 mb-3">PENJUALAN TOKO EMAS HIDUP BSI</h1>
                     <div class="form-group">
                         <label for="inputEmail" class="sr-only">Email address</label>
                         <input type="text" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Username" required="" autofocus="">@error('email')
@@ -65,7 +65,7 @@
                             <input type="checkbox" value="remember-me"> Stay logged in </label>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-                    <p class="mt-5 mb-3 text-muted">© 2020</p>
+                    <p class="mt-5 mb-3 text-muted">© 2024</p>
                 </form>
             </div>
         </div>

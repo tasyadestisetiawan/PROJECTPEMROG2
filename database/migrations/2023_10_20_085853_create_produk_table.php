@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +18,9 @@ return new class extends Migration
             $table->string('harga');
             $table->integer('stok')->nullable();
             $table->unsignedBigInteger('kategori_id');
-            // $table->unsignedBigInteger('user_id');
+            $table->string('gambar')->nullable(); 
             $table->timestamps();
             $table->foreign('kategori_id')->references('id')->on('kategori');
-            // $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

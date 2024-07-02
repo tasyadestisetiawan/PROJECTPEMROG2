@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Transaksi;
+use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $produk = Produk::orderBy('id', 'desc')->get();
@@ -20,10 +18,6 @@ class ProdukController extends Controller
             'produk' => $produk
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
 
     public function create()
     {
@@ -35,35 +29,31 @@ class ProdukController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-    {
-        // ddd($request);
-        $validatedData = $request->validate([
-            'nama_produk' => 'required|max:255|unique:produk',
-            'kategori_id' => 'required',
-            'berat' => 'required',
-            'satuan' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
-        ]);
-        Produk::create($validatedData);
-        return redirect('/produk')->with('success', 'Data berhasil tersimpan');
+{
+    $validatedData = $request->validate([
+        'nama_produk' => 'required',
+        'kategori_id' => 'required',
+        'berat' => 'required',
+        'satuan' => 'required',
+        'harga' => 'required',
+        'stok' => 'required',
+        'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    if ($request->file('gambar')) {
+        $imageName = time().'.'.$request->gambar->extension();  
+        $request->gambar->storeAs('public/produk', $imageName);
+        $validatedData['gambar'] = 'produk/' . $imageName;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    Produk::create($validatedData);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    return redirect('/produk')->with('success', 'Produk berhasil disimpan');
+}
+
+    
+
     public function edit(string $id)
     {
         $kategori = Kategori::orderBy('nama_kategori', 'asc')->get();
@@ -76,9 +66,6 @@ class ProdukController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $produk = Produk::findOrFail($id);
@@ -89,20 +76,35 @@ class ProdukController extends Controller
             'satuan' => 'required',
             'harga' => 'required',
             'stok' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ];
 
         if ($request->judul != $produk->judul) {
             $rules['judul'] = 'required|max:255|unique:produk';
         }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('gambar')) {
+            if ($produk->gambar) {
+                Storage::delete('public/' . $produk->gambar);
+            }
+            $imageName = time().'.'.$request->gambar->extension();  
+            $request->gambar->storeAs('public/produk', $imageName);
+            $validatedData['gambar'] = 'produk/' . $imageName;
+        }
+
+        $produk->update($validatedData);
+        return redirect('/produk')->with('success', 'Data berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $produk = Produk::findOrFail($id);
+        if ($produk->gambar) {
+            Storage::delete('public/' . $produk->gambar);
+        }
         $produk->delete();
-        return redirect('/produk');
+        return redirect('/produk')->with('success', 'Data berhasil dihapus');
     }
 }
