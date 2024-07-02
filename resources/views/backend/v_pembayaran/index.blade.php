@@ -33,10 +33,10 @@
                                         <td>{{ $pembayaran->id }}</td>
                                         <td>{{ $pembayaran->transaksi_id }}</td>
                                         <td>{{ $pembayaran->transaksi->customer->nama_customer }}</td>
-                                        <td>Rp {{ number_format($pembayaran->transaksi->total_harga, 0, ',', '.') }}</td>
-                                        <td>Rp {{ number_format($pembayaran->jumlah_bayar, 0, ',', '.') }}</td>
-                                        <td>Rp {{ number_format($pembayaran->kembalian ?? 0, 0, ',', '.') }}</td>
-                                        <td>{{ $pembayaran->created_at->format('d M Y H:i:s') }}</td>
+                                        <td>{{ $pembayaran->transaksi->total_harga }}</td>
+                                        <td>{{ $pembayaran->jumlah_bayar }}</td>
+                                        <td>{{ $pembayaran->kembalian }}</td>
+                                        <td>{{ $pembayaran->created_at }}</td>
                                         <td>
                                             <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                             <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST" style="display: inline;">
