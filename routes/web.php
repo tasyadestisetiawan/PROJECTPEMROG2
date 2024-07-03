@@ -32,5 +32,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('pembayaran', PembayaranController::class);
     Route::get('transaksi/{id}', [TransaksiController::class, 'show'])->name('transaksi.show');
-    Route::get('transaksi/print', [TransaksiController::class, 'generatePDF'])->name('transaksi.print');
+    Route::post('transaksi/print', [TransaksiController::class, 'generatePDF'])->name('transaksi.print');
 }); 

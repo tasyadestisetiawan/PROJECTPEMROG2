@@ -27,4 +27,10 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function pembayaran()
+{
+    return $this->hasOne(Pembayaran::class);
+}
+
 }

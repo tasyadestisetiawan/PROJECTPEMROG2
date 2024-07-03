@@ -3,7 +3,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="header clearfix">
-        <form action="{{ route('transaksi.print') }}" method="GET" class="form-inline float-end">
+        <form action="{{ route('transaksi.print') }}" method="POST" class="form-inline float-end">
+            @csrf
             <div class="row gx-3 align-items-center">
                 <div class="col-auto">
                     <label for="date" class="sr-only">Date</label>
@@ -36,16 +37,16 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Customer</th>
-                            <th>Produk</th>
-                            <th>Gambar Produk</th>
-                            <th>Quantity</th>
-                            <th>Berat Satuan</th>
-                            <th>Harga Satuan</th>
-                            <th>Total Harga</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
+                            <th><h6>No</h6></th>
+                            <th><h6>Nama Customer</h6></th>
+                            <th><h6>Produk</h6></th>
+                            <th><h6>Gambar Produk</h6></th>
+                            <th><h6>Quantity</h6></th>
+                            <th><h6>Berat Satuan</h6></th>
+                            <th><h6>Harga Satuan</h6></th>
+                            <th><h6>Total Harga</h6></th>
+                            <th><h6>Tanggal</h6></th>
+                            <th><h6>Aksi</h6></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -11,9 +11,15 @@
         <table class="table datatables" id="dataTable-1">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Nama Kategori</th>
-                    <th>Aksi</th>
+                    <th>
+                        <h6>No</h6>
+                    </th>
+                    <th>
+                        <h6>Nama Kategori</h6>
+                    </th>
+                    <th>
+                        <h6>Aksi</h6>
+                    </th>
                 </tr>
             </thead>
 
@@ -23,14 +29,18 @@
                     <td>{{$index+1}}</td>
                     <td>{{$row->nama_kategori}}</td>
                     <td>
-                        <a href="{{ route('kategori.edit', $row->id) }}" title="Ubah Data">
-                            <span class="btn btn-success btn-sm show_confirm"><i class="fa fa-edit"></i>Ubah</span>
+                        <a href="{{ route('kategori.edit', $row->id) }}" title="Ubah Data" class="btn btn-success btn-sm">
+                            <i class="fa fa-edit"></i> Ubah
                         </a>
+
                         <form method="POST" action="{{ route('kategori.destroy', $row->id) }}" style="display: inline-block;">
                             @method('delete')
                             @csrf
-                            <button type="button" class="btn btn-danger btn-sm show_confirm" data-toggle="tooltip" title='Delete' data-konf-delete="{{ $row->nama_kategori }}"><i class="fa fa-trash"></i>Hapus</button></button>
+                            <button type="submit" class="btn btn-danger btn-sm show_confirm" data-toggle="tooltip" title='Delete' data-konf-delete="{{ $row->nama_kategori }}">
+                                <i class="fa fa-trash"></i> Hapus
+                            </button>
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

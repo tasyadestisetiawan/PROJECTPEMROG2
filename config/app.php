@@ -181,9 +181,5 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-        'PDF' => PDF::class, // Menambahkan alias untuk kelas PDF
-    ])->toArray(),
 
 ];

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('backend.v_layouts.app')
 
 @section('content')
     <div class="container">
@@ -21,6 +21,7 @@
                                 <input type="number" class="form-control" id="jumlah_bayar" name="jumlah_bayar" value="{{ $pembayaran->jumlah_bayar }}" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
+                            <a href="{{route('pembayaran.index')}}"><button type="button" class="btn btn-danger">Kembali</button> </a>
                         </form>
                     </div>
                 </div>

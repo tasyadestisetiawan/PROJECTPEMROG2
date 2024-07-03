@@ -9,15 +9,15 @@
         <table class="table datatables" id="dataTable-1">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Kategori</th>
-                    <th>Nama Produk</th>
-                    <th>Berat</th>
-                    <th>Satuan</th>
-                    <th>Harga</th>
-                    <th>Stok</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
+                    <th><h6>No</h6></th>
+                    <th><h6>Kategori</h6></th>
+                    <th><h6>Nama Produk</h6></th>
+                    <th><h6>Berat</h6></th>
+                    <th><h6>Satuan</h6></th>
+                    <th><h6>Harga</h6></th>
+                    <th><h6>Stok</h6></th>
+                    <th><h6>Gambar</h6></th>
+                    <th><h6>Aksi</h6></th>
                 </tr>
             </thead>
             <tbody>

@@ -12,11 +12,11 @@
         <table class="table datatables" id="dataTable-1">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Nama Customer</th>
-                    <th>Email</th>
-                    <th>HP</th>
-                    <th>Aksi</th>
+                    <th><h6>No</h6></th>
+                    <th><h6>Nama Customer</h6></th>
+                    <th><h6>Email</h6></th>
+                    <th><h6>HP</h6></th>
+                    <th><h6>Aksi</h6></th>
                 </tr>
             </thead>
 

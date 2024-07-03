@@ -12,19 +12,19 @@ class HomeController extends Controller
     public function index()
     {
         $judul = 'Beranda';
-        
+
         // Mengambil data customer, sesuaikan dengan model dan query yang sesuai
         $customers = Customer::orderBy('created_at', 'desc')->limit(5)->get();
-        
+
         // Menghitung total jumlah transaksi
         $totalTransaksi = Transaksi::count();
-        
+
         // Mengambil data transaksi per bulan untuk grafik
         $transactions = Transaksi::selectRaw('MONTH(tanggal) as bulan, COUNT(id) as total_transaksi')
-                                ->groupBy('bulan')
-                                ->orderBy('bulan')
-                                ->get();
-        
+            ->groupBy('bulan')
+            ->orderBy('bulan')
+            ->get();
+
         $bulan = [];
         $jumlah_transaksi = [];
 

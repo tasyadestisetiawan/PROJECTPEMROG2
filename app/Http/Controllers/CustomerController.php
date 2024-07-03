@@ -70,9 +70,13 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, string $id)
     {
         $customer = Customer::findOrFail($id);
+
         $rules = [
             'nama_customer' => 'required',
             'email' => 'required',
@@ -82,7 +86,22 @@ class CustomerController extends Controller
         if ($request->judul != $customer->judul) {
             $rules['judul'] = 'required|max:255|unique:customer';
         }
+
+        // Validate input
+        $validatedData = $request->validate($rules);
+
+        // Update customer data
+        $customer->nama_customer = $request->nama_customer;
+        $customer->email = $request->email;
+        $customer->hp = $request->hp;
+
+        // Save updated customer
+        $customer->save();
+
+        // Redirect to index view
+        return redirect()->route('customer.index')->with('success', 'Customer berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.

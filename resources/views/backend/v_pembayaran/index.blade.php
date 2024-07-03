@@ -7,7 +7,6 @@
                 <div class="card">
                     <div class="card-header">
                         Daftar Pembayaran
-                        <a href="{{ route('pembayaran.create') }}" class="btn btn-primary btn-sm float-right">Tambah Pembayaran</a>
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -17,33 +16,42 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID Pembayaran</th>
-                                    <th>Transaksi ID</th>
-                                    <th>Nama Customer</th>
-                                    <th>Total Harga</th>
-                                    <th>Jumlah Bayar</th>
-                                    <th>Kembalian</th>
-                                    <th>Tanggal Pembayaran</th>
-                                    <th>Aksi</th>
+                                    <th><h6>ID Pembayaran</h6></th>
+                                    <th><h6>Transaksi ID</h6></th>
+                                    <th><h6>Nama Customer</h6></th>
+                                    <th><h6>Nama Produk</h6></th>
+                                    <th><h6>Total Harga</h6></th>
+                                    <th><h6>Jumlah Bayar</h6></th>
+                                    <th><h6>Kembalian</h6></th>
+                                    <th><h6>Tanggal Pembayaran</h6></th>
+                                    <th><h6>Aksi</h6></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pembayarans as $pembayaran)
+                                @foreach ($transaksis as $transaksi)
+                                    @php
+                                        $pembayaran = $transaksi->pembayaran;
+                                    @endphp
                                     <tr>
-                                        <td>{{ $pembayaran->id }}</td>
-                                        <td>{{ $pembayaran->transaksi_id }}</td>
-                                        <td>{{ $pembayaran->transaksi->customer->nama_customer }}</td>
-                                        <td>{{ $pembayaran->transaksi->total_harga }}</td>
-                                        <td>{{ $pembayaran->jumlah_bayar }}</td>
-                                        <td>{{ $pembayaran->kembalian }}</td>
-                                        <td>{{ $pembayaran->created_at }}</td>
+                                        <td>{{ $pembayaran ? $pembayaran->id : '-' }}</td>
+                                        <td>{{ $transaksi->id }}</td>
+                                        <td>{{ $transaksi->customer->nama_customer }}</td>
+                                        <td>{{ $transaksi->produk->nama_produk }}</td>
+                                        <td>Rp {{ number_format($transaksi->total_harga, 0, ',', '.') }}</td>
+                                        <td>{{ $pembayaran ? 'Rp ' . number_format($pembayaran->jumlah_bayar, 0, ',', '.') : '-' }}</td>
+                                        <td>{{ $pembayaran ? 'Rp ' . number_format($pembayaran->kembalian, 0, ',', '.') : '-' }}</td>
+                                        <td>{{ $pembayaran ? $pembayaran->created_at : '-' }}</td>
                                         <td>
-                                            <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
-                                            </form>
+                                            @if ($pembayaran)
+                                                <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                                                </form>
+                                            @else
+                                                <a href="{{ route('pembayaran.create', ['transaksi_id' => $transaksi->id]) }}" class="btn btn-primary btn-sm @if ($pembayaran) disabled @endif" @if ($pembayaran) disabled="disabled" aria-disabled="true" tabindex="-1" @endif>Bayar</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
