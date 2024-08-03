@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     use HasFactory;
-    protected $table = 'transaksi'; 
+    protected $table = 'transaksi';
     protected $fillable = [
         'customer_id',
         'produk_id',
@@ -29,8 +30,7 @@ class Transaksi extends Model
     }
 
     public function pembayaran()
-{
-    return $this->hasOne(Pembayaran::class);
-}
-
+    {
+        return $this->hasOne(Pembayaran::class);
+    }
 }

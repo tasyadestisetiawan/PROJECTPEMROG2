@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Kategori;
-use App\Models\Transaksi;
 use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
@@ -51,8 +50,6 @@ class ProdukController extends Controller
 
     return redirect('/produk')->with('success', 'Produk berhasil disimpan');
 }
-
-    
 
     public function edit(string $id)
     {

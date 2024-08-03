@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('produk_id');
             $table->integer('quantity');
-            $table->decimal('berat', 8, 2); // Kolom berat
+            $table->decimal('berat', 8, 2);
             $table->decimal('harga_satuan', 15, 2);
             $table->decimal('subtotal_harga', 15, 2)->default(0);
             $table->decimal('total_harga', 15, 2)->default(0);

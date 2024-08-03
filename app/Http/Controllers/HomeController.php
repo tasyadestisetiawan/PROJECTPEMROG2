@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $judul = 'Beranda';
 
-        // Mengambil data customer, sesuaikan dengan model dan query yang sesuai
+        // Mengambil data customer, sesuai dengan model dan query
         $customers = Customer::orderBy('created_at', 'desc')->limit(5)->get();
 
         // Menghitung total jumlah transaksi

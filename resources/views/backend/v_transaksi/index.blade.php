@@ -37,16 +37,36 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th><h6>No</h6></th>
-                            <th><h6>Nama Customer</h6></th>
-                            <th><h6>Produk</h6></th>
-                            <th><h6>Gambar Produk</h6></th>
-                            <th><h6>Quantity</h6></th>
-                            <th><h6>Berat Satuan</h6></th>
-                            <th><h6>Harga Satuan</h6></th>
-                            <th><h6>Total Harga</h6></th>
-                            <th><h6>Tanggal</h6></th>
-                            <th><h6>Aksi</h6></th>
+                            <th>
+                                <h6>No</h6>
+                            </th>
+                            <th>
+                                <h6>Nama Customer</h6>
+                            </th>
+                            <th>
+                                <h6>Produk</h6>
+                            </th>
+                            <th>
+                                <h6>Gambar Produk</h6>
+                            </th>
+                            <th>
+                                <h6>Quantity</h6>
+                            </th>
+                            <th>
+                                <h6>Berat Satuan</h6>
+                            </th>
+                            <th>
+                                <h6>Harga Satuan</h6>
+                            </th>
+                            <th>
+                                <h6>Total Harga</h6>
+                            </th>
+                            <th>
+                                <h6>Tanggal</h6>
+                            </th>
+                            <th>
+                                <h6>Aksi</h6>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

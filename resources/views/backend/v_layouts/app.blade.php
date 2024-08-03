@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>11.3A.35</title>
+    <title>11.4A.35</title>
 
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/simplebar.css') }}">
@@ -46,19 +46,19 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="avatar avatar-sm mt-2">
-            <img src="{{ asset('backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
-        </span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="#">Profile</a>
-        <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
-            @csrf
-            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Logout</button>
-        </form>
-    </div>
-</li>
+                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar avatar-sm mt-2">
+                            <img src="{{ asset('backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Logout</button>
+                        </form>
+                    </div>
+                </li>
 
             </ul>
         </nav>

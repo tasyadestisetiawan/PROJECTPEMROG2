@@ -75,7 +75,7 @@ class TransaksiController extends Controller
                 'berat' => $produk->berat,
                 'harga_satuan' => $produk->harga,
                 'subtotal_harga' => $produk->harga * $validatedData['quantity'],
-                'total_harga' => $produk->harga * $validatedData['quantity'], // Perbaikan di sini
+                'total_harga' => $produk->harga * $validatedData['quantity'],
                 'tanggal' => $validatedData['tanggal'],
             ]);
 
@@ -102,7 +102,7 @@ class TransaksiController extends Controller
     {
         $produk = Produk::orderBy('nama_produk', 'asc')->get();
         $transaksi = Transaksi::findOrFail($id);
-        $customers = Customer::orderBy('nama_customer', 'asc')->get(); // Fetch customers
+        $customers = Customer::orderBy('nama_customer', 'asc')->get();
 
         return view('backend.v_transaksi.edit', [
             'judul' => 'Transaksi',
