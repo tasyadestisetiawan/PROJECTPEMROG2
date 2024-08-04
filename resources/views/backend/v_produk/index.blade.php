@@ -17,6 +17,7 @@
                     <th><h6>Harga</h6></th>
                     <th><h6>Stok</h6></th>
                     <th><h6>Gambar</h6></th>
+                    <th><h6>Nama Admin</h6></th>
                     <th><h6>Aksi</h6></th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                             Tidak ada gambar
                         @endif
                     </td>
+                    <td>{{$row->user->nama}}</td>
                     <td>
                         <a href="{{ route('produk.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <form action="{{ route('produk.destroy', $row->id) }}" method="POST" style="display: inline-block;">

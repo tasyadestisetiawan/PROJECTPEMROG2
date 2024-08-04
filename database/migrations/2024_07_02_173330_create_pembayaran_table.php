@@ -11,13 +11,12 @@ class CreatePembayaranTable extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transaksi_id');
+            $table->unsignedBigInteger('user_id');
             $table->decimal('jumlah_bayar', 10, 2);
             $table->decimal('kembalian', 10, 2)->nullable();
             $table->timestamps();
-
-            $table->foreign('transaksi_id')
-                ->references('id')->on('transaksi')
-                ->onDelete('cascade');
+            $table->foreign('transaksi_id')->references('id')->on('transaksi')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

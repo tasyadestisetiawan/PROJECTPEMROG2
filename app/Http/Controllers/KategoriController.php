@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
-
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
@@ -13,7 +13,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::orderBy('id', 'desc')->get();
+        $kategori = Kategori::with('user')->orderBy('id', 'desc')->get();
         return view('backend.v_kategori.index', [
             'judul' => 'Kategori',
             'sub' => 'Data Kategori',
@@ -41,10 +41,10 @@ class KategoriController extends Controller
         $validatedData = $request->validate([
             'nama_kategori' => 'required|max:255|unique:kategori',
         ]);
+        $validatedData['user_id'] = Auth::id();
         Kategori::create($validatedData);
         return redirect('/kategori')->with('success', 'Data berhasil tersimpan');
     }
-
     /**
      * Display the specified resource.
      */

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 
 class TransaksiController extends Controller
@@ -21,7 +21,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::with('produk', 'customer')->orderBy('id', 'desc')->get();
+        $transaksi = Transaksi::with('produk', 'customer','user')->orderBy('id', 'desc')->get();
         return view('backend.v_transaksi.index', [
             'judul' => 'transaksi',
             'sub' => 'Data transaksi',
@@ -49,47 +49,48 @@ class TransaksiController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'customer_id' => 'required',
-            'produk_id' => 'required',
-            'quantity' => 'required|integer|min:1',
-            'tanggal' => 'required|date',
+{
+    $validatedData = $request->validate([
+        'customer_id' => 'required',
+        'produk_id' => 'required',
+        'quantity' => 'required|integer|min:1',
+        'tanggal' => 'required|date',
+    ]);
+
+    $produk = Produk::findOrFail($request->produk_id);
+
+    // Cek stok produk sebelum membuat transaksi
+    if ($produk->stok < $validatedData['quantity']) {
+        Log::error('Stok produk tidak mencukupi.', ['produk_id' => $request->produk_id, 'quantity' => $validatedData['quantity']]);
+        return redirect()->back()->withErrors(['stok' => 'Stok produk tidak mencukupi.']);
+    }
+
+    DB::beginTransaction();
+    try {
+        $transaksi = Transaksi::create([
+            'customer_id' => $validatedData['customer_id'],
+            'produk_id' => $validatedData['produk_id'],
+            'quantity' => $validatedData['quantity'],
+            'berat' => $produk->berat,
+            'harga_satuan' => $produk->harga,
+            'total_harga' => $produk->harga * $validatedData['quantity'],
+            'tanggal' => $validatedData['tanggal'],
+            'user_id' => Auth::id(),
         ]);
 
-        $produk = Produk::findOrFail($request->produk_id);
+        // Kurangi stok produk
+        $produk->stok -= $validatedData['quantity'];
+        $produk->save();
 
-        // Cek stok produk sebelum membuat transaksi
-        if ($produk->stok < $validatedData['quantity']) {
-            return redirect()->back()->withErrors(['stok' => 'Stok produk tidak mencukupi.']);
-        }
-
-        // Gunakan transaksi database
-        DB::beginTransaction();
-        try {
-            // Buat transaksi baru
-            $transaksi = Transaksi::create([
-                'customer_id' => $validatedData['customer_id'],
-                'produk_id' => $validatedData['produk_id'],
-                'quantity' => $validatedData['quantity'],
-                'berat' => $produk->berat,
-                'harga_satuan' => $produk->harga,
-                'subtotal_harga' => $produk->harga * $validatedData['quantity'],
-                'total_harga' => $produk->harga * $validatedData['quantity'],
-                'tanggal' => $validatedData['tanggal'],
-            ]);
-
-            // Kurangi stok produk
-            $produk->stok -= $validatedData['quantity'];
-            $produk->save();
-
-            DB::commit();
-            return redirect('/transaksi')->with('success', 'Data berhasil tersimpan');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data.']);
-        }
+        DB::commit();
+        return redirect('/transaksi')->with('success', 'Data berhasil tersimpan');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        Log::error('Terjadi kesalahan saat menyimpan data.', ['error' => $e->getMessage()]);
+        return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data.']);
     }
+}
+
 
 
     /**
@@ -129,16 +130,14 @@ class TransaksiController extends Controller
         ]);
 
         $produk = Produk::findOrFail($request->produk_id);
-        $subtotal_harga = $produk->harga * $request->quantity;
-        $total_harga = $subtotal_harga;
-
+        $total_harga = $produk->harga * $request->quantity;
+       
         $transaksi->update([
             'customer_id' => $validatedData['customer_id'],
             'produk_id' => $validatedData['produk_id'],
             'quantity' => $validatedData['quantity'],
             'berat' => $produk->berat,
             'harga_satuan' => $produk->harga,
-            'subtotal_harga' => $subtotal_harga,
             'total_harga' => $total_harga,
             'tanggal' => $validatedData['tanggal'],
         ]);

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h3>{{ $judul }}</h3>
     <h3><center>Selamat Datang di Sistem Penjualan Toko Emas HIDUP BSI TEGAL</center></h3>
     
     <div class="row">

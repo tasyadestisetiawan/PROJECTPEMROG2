@@ -24,6 +24,7 @@
                                     <th><h6>Jumlah Bayar</h6></th>
                                     <th><h6>Kembalian</h6></th>
                                     <th><h6>Tanggal Pembayaran</h6></th>
+                                    <th><h6>Nama Admin</h6></th>
                                     <th><h6>Aksi</h6></th>
                                 </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                         <td>{{ $pembayaran ? 'Rp ' . number_format($pembayaran->jumlah_bayar, 0, ',', '.') : '-' }}</td>
                                         <td>{{ $pembayaran ? 'Rp ' . number_format($pembayaran->kembalian, 0, ',', '.') : '-' }}</td>
                                         <td>{{ $pembayaran ? $pembayaran->created_at : '-' }}</td>
+                                        <td>{{ $transaksi->user->nama }}</td>
                                         <td>
                                             @if ($pembayaran)
                                                 <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" class="btn btn-sm btn-warning">Edit</a>

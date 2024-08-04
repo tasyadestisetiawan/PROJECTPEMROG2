@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('is_admin');
+            $table->enum('role', ['admin', 'superadmin']);
             $table->string('hp', 13);
             $table->timestamps();
         });

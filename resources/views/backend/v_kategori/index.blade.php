@@ -17,6 +17,7 @@
                     <th>
                         <h6>Nama Kategori</h6>
                     </th>
+                    <th><h6>Nama Admin</h6></th>
                     <th>
                         <h6>Aksi</h6>
                     </th>
@@ -28,19 +29,14 @@
                 <tr>
                     <td>{{$index+1}}</td>
                     <td>{{$row->nama_kategori}}</td>
+                    <td>{{ $row->user ? $row->user->nama : '' }}</td>
                     <td>
-                        <a href="{{ route('kategori.edit', $row->id) }}" title="Ubah Data" class="btn btn-success btn-sm">
-                            <i class="fa fa-edit"></i> Ubah
-                        </a>
-
-                        <form method="POST" action="{{ route('kategori.destroy', $row->id) }}" style="display: inline-block;">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm show_confirm" data-toggle="tooltip" title='Delete' data-konf-delete="{{ $row->nama_kategori }}">
-                                <i class="fa fa-trash"></i> Hapus
-                            </button>
-                        </form>
-
+                        <a href="{{ route('kategori.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('kategori.destroy', $row->id) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
                     </td>
                 </tr>
                 @endforeach

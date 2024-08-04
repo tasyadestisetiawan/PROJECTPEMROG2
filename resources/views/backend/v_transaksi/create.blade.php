@@ -4,7 +4,7 @@
 <div class="col-md-12">
     <div class="card-deck">
         <div class="card shadow mb-4">
-            <form action="{{ route('transaksi.store') }}" method="post" class="form-horizontal">
+            <form action="{{ route('transaksi.store') }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-header">
                     <strong class="card-title"> {{$sub}} </strong>
@@ -61,8 +61,9 @@
                             @enderror
                         </div>
                     </div>
+                    
                     <button type="submit" class="btn btn-success"> Simpan </button>
-                    <a href="{{ route('transaksi.index') }}" class="btn btn-danger"> Kembali </a>
+                    <a href="{{ route('transaksi.index') }}"><button type="button" class="btn btn-danger"> Kembali </button></a>
                 </div>
             </form>
         </div>

@@ -5,12 +5,13 @@ use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Produk::orderBy('id', 'desc')->get();
+        $produk = Produk::with('user')->orderBy('id', 'desc')->get();
         return view('backend.v_produk.index', [
             'judul' => 'Produk',
             'sub' => 'Data Produk',
@@ -45,7 +46,7 @@ class ProdukController extends Controller
         $request->gambar->storeAs('public/produk', $imageName);
         $validatedData['gambar'] = 'produk/' . $imageName;
     }
-
+    $validatedData['user_id'] = Auth::id();
     Produk::create($validatedData);
 
     return redirect('/produk')->with('success', 'Produk berhasil disimpan');

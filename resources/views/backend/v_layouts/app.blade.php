@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -40,19 +43,14 @@
                         <i class="fe fe-sun fe-16"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
-                        <span class="fe fe-grid fe-16"></span>
-                    </a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="avatar avatar-sm mt-2">
-                            <img src="{{ asset('backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
+                            <img src="{{ asset(Auth::user()->foto ? 'storage/' . Auth::user()->foto : 'backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle">
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                         <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
                             @csrf
                             <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Logout</button>
@@ -80,12 +78,8 @@
                     </a>
                 </div>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-
                 </ul>
-
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-
-
                 </ul>
                 <p class="text-muted nav-heading mt-4 mb-1">
                     <span>Apps</span>
@@ -135,10 +129,8 @@
                             <span class="ml-3 item-text">Pembayaran</span>
                         </a>
                     </li>
-
                 </ul>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-
                 </ul>
             </nav>
         </aside>

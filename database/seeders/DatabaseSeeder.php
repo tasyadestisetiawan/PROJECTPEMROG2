@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Kategori;
 use App\Models\Customer;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class DatabaseSeeder extends Seeder
@@ -16,16 +17,16 @@ class DatabaseSeeder extends Seeder
         User::create([
             'nama' => 'Administrator',
             'email' => 'admin@gmail.com',
-            'is_admin' => 1,
+            'role' => 'superadmin',
             'hp' => '087654321001',
-            'password' => bcrypt('P@55word'),
+            'password' => Hash::make('P@55word'),
         ]);
         User::create([
-            'nama' => 'Sopian Aji',
-            'email' => 'sopian4ji@gmail.com',
-            'is_admin' => 0,
+            'nama' => 'Tasya',
+            'email' => 'tasya@gmail.com',
+            'role' => 'admin',
             'hp' => '087654321001',
-            'password' => bcrypt('P@55word'),
+            'password' => Hash::make('P@55word'),
         ]);
         // data customer
         Customer::create([
@@ -37,11 +38,6 @@ class DatabaseSeeder extends Seeder
             'nama_customer' => 'Melly Agustin',
             'email' => 'melly@gmail.com',
             'hp' => '087654321004',
-        ]);
-
-        // Data Kategori
-        Kategori::create([
-            'nama_kategori' => 'Cincin',
         ]);
     }
 }

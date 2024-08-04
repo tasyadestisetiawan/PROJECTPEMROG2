@@ -47,10 +47,13 @@
                                 <h6>Produk</h6>
                             </th>
                             <th>
+                                <h6>Nama Admin</h6>
+                            </th>
+                            <th>
                                 <h6>Gambar Produk</h6>
                             </th>
                             <th>
-                                <h6>Quantity</h6>
+                                <h6>QTY</h6>
                             </th>
                             <th>
                                 <h6>Berat Satuan</h6>
@@ -75,6 +78,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $trans->customer->nama_customer }}</td>
                             <td>{{ $trans->produk->nama_produk }}</td>
+                            <td>{{ $trans->user->nama }}</td>
                             <td>
                                 @if ($trans->produk->gambar)
                                 <img src="{{ asset('storage/' . $trans->produk->gambar) }}" alt="{{ $trans->produk->nama_produk }}" style="max-width: 100px; max-height: 100px;">

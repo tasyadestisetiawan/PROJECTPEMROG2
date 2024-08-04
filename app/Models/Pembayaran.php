@@ -13,6 +13,7 @@ class Pembayaran extends Model
 
     protected $fillable = [
         'transaksi_id',
+        'user_id',
         'jumlah_bayar',
         'kembalian',
     ];
@@ -20,5 +21,10 @@ class Pembayaran extends Model
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'transaksi_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class );
     }
 }

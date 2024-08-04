@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -88,7 +90,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //ddd($request);
         $user = User::findOrFail($id);
         $rules = [
             'nama' => 'required|max:255',
@@ -113,4 +114,30 @@ class UserController extends Controller
         $user->delete();
         return redirect('/user')->with('msgSuccess', 'Data berhasil dihapus');
     }
+
+    public function profile()
+{
+    $user = Auth::user();
+    return view('backend.v_profile.profile', compact('user'));
+}
+
+public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+
+    $request->validate([
+        'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    if ($request->hasFile('foto')) {
+        $imageName = time().'.'.$request->foto->extension();
+        $request->foto->storeAs('public/fotos', $imageName);
+        $user->foto = 'fotos/' . $imageName;
+    }
+
+    $user->save();
+
+    return redirect()->route('profile')->with('success', 'Profile updated successfully');
+}
+
 }

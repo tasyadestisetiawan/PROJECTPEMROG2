@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $judul = 'Beranda';
+        
 
         // Mengambil data customer, sesuai dengan model dan query
         $customers = Customer::orderBy('created_at', 'desc')->limit(5)->get();
@@ -40,6 +40,6 @@ class HomeController extends Controller
             $jumlah_transaksi[$index] = $transaction->total_transaksi;
         }
 
-        return view('backend.v_home.index', compact('judul', 'customers', 'totalTransaksi', 'bulan', 'jumlah_transaksi'));
+        return view('backend.v_home.index', compact('customers', 'totalTransaksi', 'bulan', 'jumlah_transaksi'));
     }
 }

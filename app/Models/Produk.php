@@ -19,6 +19,7 @@ class Produk extends Model
         'stok',
         'kategori_id',
         'gambar',
+        'user_id'
     ];
 
     public function kategori()
@@ -29,5 +30,9 @@ class Produk extends Model
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
