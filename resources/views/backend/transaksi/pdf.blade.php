@@ -1,11 +1,9 @@
-<!-- backend/transaksi/pdf.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Laporan Transaksi</title>
     <style>
-        /* Define your styles for the PDF here */
     </style>
 </head>
 <body>

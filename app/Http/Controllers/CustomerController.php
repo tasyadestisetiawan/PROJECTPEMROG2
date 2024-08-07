@@ -38,8 +38,8 @@ class CustomerController extends Controller
     {
         //ddd($request);
         $validatedData = $request->validate([
-            'nama_customer' => 'required',
-            'email' => 'required',
+            'nama_customer' => 'required|unique:customer',
+            'email' => 'required|unique:customer',
             'hp' => 'required',
         ]);
         Customer::create($validatedData);
@@ -70,9 +70,6 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $customer = Customer::findOrFail($id);
@@ -87,7 +84,7 @@ class CustomerController extends Controller
             $rules['judul'] = 'required|max:255|unique:customer';
         }
 
-        // Validate input
+        // Validasi input
         $validatedData = $request->validate($rules);
 
         // Update customer data
@@ -95,13 +92,12 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->hp = $request->hp;
 
-        // Save updated customer
+        // Save update customer
         $customer->save();
 
-        // Redirect to index view
+        // Redirect ke view
         return redirect()->route('customer.index')->with('success', 'Customer berhasil diperbarui.');
     }
-
 
     /**
      * Remove the specified resource from storage.

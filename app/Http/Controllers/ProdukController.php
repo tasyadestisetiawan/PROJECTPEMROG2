@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,27 +31,27 @@ class ProdukController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'nama_produk' => 'required',
-        'kategori_id' => 'required',
-        'berat' => 'required',
-        'satuan' => 'required',
-        'harga' => 'required',
-        'stok' => 'required',
-        'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    {
+        $validatedData = $request->validate([
+            'nama_produk' => 'required',
+            'kategori_id' => 'required',
+            'berat' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    if ($request->file('gambar')) {
-        $imageName = time().'.'.$request->gambar->extension();  
-        $request->gambar->storeAs('public/produk', $imageName);
-        $validatedData['gambar'] = 'produk/' . $imageName;
+        if ($request->file('gambar')) {
+            $imageName = time() . '.' . $request->gambar->extension();
+            $request->gambar->storeAs('public/produk', $imageName);
+            $validatedData['gambar'] = 'produk/' . $imageName;
+        }
+        $validatedData['user_id'] = Auth::id();
+        Produk::create($validatedData);
+
+        return redirect('/produk')->with('success', 'Produk berhasil disimpan');
     }
-    $validatedData['user_id'] = Auth::id();
-    Produk::create($validatedData);
-
-    return redirect('/produk')->with('success', 'Produk berhasil disimpan');
-}
 
     public function edit(string $id)
     {
@@ -74,7 +75,7 @@ class ProdukController extends Controller
             'satuan' => 'required',
             'harga' => 'required',
             'stok' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         if ($request->judul != $produk->judul) {
@@ -87,7 +88,7 @@ class ProdukController extends Controller
             if ($produk->gambar) {
                 Storage::delete('public/' . $produk->gambar);
             }
-            $imageName = time().'.'.$request->gambar->extension();  
+            $imageName = time() . '.' . $request->gambar->extension();
             $request->gambar->storeAs('public/produk', $imageName);
             $validatedData['gambar'] = 'produk/' . $imageName;
         }

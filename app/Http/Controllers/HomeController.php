@@ -11,8 +11,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        
-
         // Mengambil data customer, sesuai dengan model dan query
         $customers = Customer::orderBy('created_at', 'desc')->limit(5)->get();
 

@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Auth;
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/simplebar.css') }}">
 
-    <!-- Fonts CSS -->
-
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/feather.css ') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/dataTables.bootstrap4.css') }}">
@@ -119,13 +117,13 @@ use Illuminate\Support\Facades\Auth;
                     </li>
                     <li class="nav-item w-100">
                         <a class="nav-link" href="{{ route('transaksi.index') }}">
-                            <i class="fe fe-24 fe-box"></i>
+                            <i class="fe fe-24 fe-shopping-cart"></i>
                             <span class="ml-3 item-text">Transaksi</span>
                         </a>
                     </li>
                     <li class="nav-item w-100">
                         <a class="nav-link" href="{{ route('pembayaran.index') }}">
-                            <i class="fe fe-24 fe-box"></i>
+                            <i class="fe fe-24 fe-credit-card"></i>
                             <span class="ml-3 item-text">Pembayaran</span>
                         </a>
                     </li>

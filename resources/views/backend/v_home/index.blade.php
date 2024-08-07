@@ -32,7 +32,7 @@
         </div>
     </div>
     
-    <!-- Include Chart.js library -->
+    <!--  Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <canvas id="myChart" width="400" height="50"></canvas>

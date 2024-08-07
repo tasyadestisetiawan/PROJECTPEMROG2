@@ -40,4 +40,5 @@ class Transaksi extends Model
     {
         return $this->hasOne(Pembayaran::class);
     }
+    
 }

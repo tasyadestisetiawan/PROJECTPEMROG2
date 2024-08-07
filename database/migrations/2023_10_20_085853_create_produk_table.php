@@ -17,12 +17,10 @@ return new class extends Migration
             $table->string('satuan');
             $table->string('harga');
             $table->integer('stok')->nullable();
-            $table->unsignedBigInteger('kategori_id');
-            $table->unsignedBigInteger('user_id');
             $table->string('gambar')->nullable(); 
             $table->timestamps();
-            $table->foreign('kategori_id')->references('id')->on('kategori');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('user')->onDelete('cascade');
         });
     }
 

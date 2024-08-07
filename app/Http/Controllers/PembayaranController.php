@@ -65,10 +65,4 @@ class PembayaranController extends Controller
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil diupdate');
     }
-
-    public function destroy(Pembayaran $pembayaran)
-    {
-        $pembayaran->delete();
-        return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus');
-    }
 }

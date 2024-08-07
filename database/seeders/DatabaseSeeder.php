@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Administrator',
             'email' => 'admin@gmail.com',
             'role' => 'superadmin',
+            'foto'=>'',
             'hp' => '087654321001',
             'password' => Hash::make('P@55word'),
         ]);
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Tasya',
             'email' => 'tasya@gmail.com',
             'role' => 'admin',
+            'foto'=>'',
             'hp' => '087654321001',
             'password' => Hash::make('P@55word'),
         ]);

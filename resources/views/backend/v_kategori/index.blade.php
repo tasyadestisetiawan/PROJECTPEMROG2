@@ -17,7 +17,9 @@
                     <th>
                         <h6>Nama Kategori</h6>
                     </th>
-                    <th><h6>Nama Admin</h6></th>
+                    <th>
+                        <h6>Nama Admin</h6>
+                    </th>
                     <th>
                         <h6>Aksi</h6>
                     </th>
@@ -32,11 +34,12 @@
                     <td>{{ $row->user ? $row->user->nama : '' }}</td>
                     <td>
                         <a href="{{ route('kategori.edit', $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <form action="{{ route('kategori.destroy', $row->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                    </form>
+
+                        <form action="{{ route('kategori.destroy', $row->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

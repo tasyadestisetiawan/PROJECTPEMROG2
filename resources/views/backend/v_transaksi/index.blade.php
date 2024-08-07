@@ -92,12 +92,16 @@
                             <td>{{ 'Rp ' . number_format($trans->total_harga, 0, ',', '.') }}</td>
                             <td>{{ $trans->tanggal }}</td>
                             <td>
+                                @if ($trans->pembayaran)
+                                <span>Transaksi sudah dibayar</span>
+                                @else
                                 <a href="{{ route('transaksi.edit', $trans->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <form action="{{ route('transaksi.destroy', $trans->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
