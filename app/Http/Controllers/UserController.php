@@ -98,9 +98,10 @@ class UserController extends Controller
         ];
 
         if ($request->email != $user->email) {
-            $rules['email'] = 'required|max:255|unique:user';
+            $rules['email'] = 'required|max:255|unique:user'. $id;
         }
 
+        $validatedData = $request->validate($rules);
         $user->update($validatedData);
         return redirect('/user')->with('success', 'Data berhasil diperbaharui');
     }
@@ -139,5 +140,4 @@ public function updateProfile(Request $request)
 
     return redirect()->route('profile')->with('success', 'Profile updated successfully');
 }
-
 }

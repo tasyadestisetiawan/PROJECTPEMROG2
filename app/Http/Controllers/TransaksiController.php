@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\Produk;
 use App\Models\Customer;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Auth;
-
 
 class TransaksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $transaksi = Transaksi::with('produk', 'customer','user')->orderBy('id', 'desc')->get();
@@ -29,9 +25,6 @@ class TransaksiController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $produk = Produk::orderBy('id', 'asc')->get();
@@ -45,9 +38,6 @@ class TransaksiController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
 {
     $validatedData = $request->validate([
@@ -91,8 +81,6 @@ class TransaksiController extends Controller
     }
 }
 
-
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -113,8 +101,6 @@ class TransaksiController extends Controller
             'customers' => $customers,
         ]);
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -145,7 +131,6 @@ class TransaksiController extends Controller
         return redirect('/transaksi')->with('success', 'Data berhasil diupdate');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -156,12 +141,6 @@ class TransaksiController extends Controller
         return redirect('/transaksi')->with('success', 'Data berhasil dihapus');
     }
 
-    /**
-     * Generate PDF for transactions based on filter.
-     */
-    /**
-     * Generate PDF for transactions based on filter.
-     */
     /**
      * Generate PDF for transactions based on filter.
      */
