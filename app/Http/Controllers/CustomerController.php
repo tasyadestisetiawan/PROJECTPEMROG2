@@ -43,7 +43,7 @@ class CustomerController extends Controller
             'hp' => 'required',
         ]);
         Customer::create($validatedData);
-        return redirect('/customer')->with('success', 'Data berhasil tersimpan');
+        return redirect('/customer')->with('success', 'Data Customer berhasil tersimpan');
     }
 
     /**
@@ -96,7 +96,7 @@ class CustomerController extends Controller
         $customer->save();
 
         // Redirect ke view
-        return redirect()->route('customer.index')->with('success', 'Customer berhasil diperbarui.');
+        return redirect()->route('customer.index')->with('success', 'Data Customer berhasil diperbarui.');
     }
 
     /**
@@ -105,7 +105,10 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         $customer = Customer::findOrFail($id);
+        if ($customer->transaksi()->exists()) {
+            return redirect('/customer')->with('error', 'Customer tidak dapat dihapus karena sudah terkait dengan Transaksi.');
+        }
         $customer->delete();
-        return redirect('/customer');
+        return redirect('/customer')->with('success', 'Data Customer berhasil dihapus');
     }
 }

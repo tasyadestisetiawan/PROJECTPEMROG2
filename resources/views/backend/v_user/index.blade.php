@@ -7,7 +7,9 @@
         <a href="{{ route('user.create') }}" title="Tambah Data">
             <button type="button" class="btn mb-2 btn-outline-info">Tambah</button>
         </a>
-
+        @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
         <!-- table -->
         <table class="table datatables" id="dataTable-1">
             <thead>
@@ -53,7 +55,7 @@
                         <form action="{{ route('user.destroy', $row->id) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                         </form>
                     </td>
                     @endforeach

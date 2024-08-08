@@ -43,7 +43,7 @@ class KategoriController extends Controller
         ]);
         $validatedData['user_id'] = Auth::id();
         Kategori::create($validatedData);
-        return redirect('/kategori')->with('success', 'Data berhasil tersimpan');
+        return redirect('/kategori')->with('success', 'Data Kategori berhasil tersimpan');
     }
     /**
      * Display the specified resource.
@@ -81,7 +81,7 @@ class KategoriController extends Controller
 
         $validatedData = $request->validate($rules);
         Kategori::where('id', $id)->update($validatedData);
-        return redirect('/kategori')->with('success', 'Data berhasil diperbaharui');
+        return redirect('/kategori')->with('success', 'Data Kategori berhasil diperbaharui');
     }
 
     /**
@@ -90,7 +90,10 @@ class KategoriController extends Controller
     public function destroy(string $id)
     {
         $kategori = Kategori::findOrFail($id);
+        if ($kategori->produk()->exists()) {
+            return redirect('/kategori')->with('error', 'Kategori tidak dapat dihapus karena sudah terkait dengan produk.');
+        }
         $kategori->delete();
-        return redirect('/kategori');
+        return redirect('/kategori')->with('success', 'Data Kategori berhasil dihapus');
     }
 }

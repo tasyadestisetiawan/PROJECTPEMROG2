@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h3><center>Selamat Datang di Sistem Penjualan Toko Emas HIDUP BSI TEGAL</center></h3>
-    
+    <h3><center>Selamat Datang {{ $user->nama }} di Sistem Penjualan Toko Emas HIDUP BSI TEGAL</center></h3>   
     <div class="row">
         <div class="col-md-6">
             <div class="card">

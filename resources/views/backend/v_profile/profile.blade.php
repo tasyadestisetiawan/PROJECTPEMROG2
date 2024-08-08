@@ -14,6 +14,9 @@
                         <div class="form-group text-center">
                             <img src="{{ asset($user->foto ? 'storage/' . $user->foto : 'backend/avatars/face-1.jpg') }}" alt="..." class="avatar-img rounded-circle mb-3" width="150" height="150">
                         </div>
+                        @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
                         <div class="form-group">
                             <label for="nama">Name</label>
                             <input type="text" class="form-control" id="nama" value="{{ $user->nama }}" readonly>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Transaksi;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         // Mengambil data customer, sesuai dengan model dan query
         $customers = Customer::orderBy('created_at', 'desc')->limit(5)->get();
 
@@ -38,6 +40,6 @@ class HomeController extends Controller
             $jumlah_transaksi[$index] = $transaction->total_transaksi;
         }
 
-        return view('backend.v_home.index', compact('customers', 'totalTransaksi', 'bulan', 'jumlah_transaksi'));
+        return view('backend.v_home.index', compact('user','customers', 'totalTransaksi', 'bulan', 'jumlah_transaksi'));
     }
 }

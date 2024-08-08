@@ -94,16 +94,25 @@ class ProdukController extends Controller
         }
 
         $produk->update($validatedData);
-        return redirect('/produk')->with('success', 'Data berhasil diupdate');
+        return redirect('/produk')->with('success', 'Produk berhasil diupdate');
+    }
+
+    public function show($id)
+    {
+        $produk = Produk::findOrFail($id);
+        return view('backend.v_produk.show', compact('produk'));
     }
 
     public function destroy(string $id)
     {
         $produk = Produk::findOrFail($id);
+        if ($produk->transaksi()->exists()) {
+            return redirect('/produk')->with('error', 'Produk tidak dapat dihapus karena sudah terkait dengan transaksi.');
+        }
         if ($produk->gambar) {
             Storage::delete('public/' . $produk->gambar);
         }
         $produk->delete();
-        return redirect('/produk')->with('success', 'Data berhasil dihapus');
+        return redirect('/produk')->with('success', 'Produk berhasil dihapus');
     }
 }

@@ -73,7 +73,7 @@ class TransaksiController extends Controller
             $produk->save();
 
             DB::commit();
-            return redirect('/transaksi')->with('success', 'Data berhasil tersimpan');
+            return redirect('/transaksi')->with('success', 'Transaksi berhasil tersimpan');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Terjadi kesalahan saat menyimpan data.', ['error' => $e->getMessage()]);
@@ -141,7 +141,7 @@ class TransaksiController extends Controller
             ]);
 
             DB::commit();
-            return redirect('/transaksi')->with('success', 'Data berhasil diupdate');
+            return redirect('/transaksi')->with('success', 'Transaksi berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Terjadi kesalahan saat menyimpan data.', ['error' => $e->getMessage()]);
@@ -168,7 +168,7 @@ class TransaksiController extends Controller
             $transaksi->delete();
 
             DB::commit();
-            return redirect('/transaksi')->with('success', 'Data berhasil dihapus');
+            return redirect('/transaksi')->with('success', 'Transaksi berhasil dihapus');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Terjadi kesalahan saat menghapus data.', ['error' => $e->getMessage()]);

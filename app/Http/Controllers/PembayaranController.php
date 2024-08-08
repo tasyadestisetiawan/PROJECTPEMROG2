@@ -11,7 +11,7 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::with('customer', 'produk','user')->orderBy('created_at', 'desc')->get();
+        $transaksis = Transaksi::with('customer', 'produk', 'user')->orderBy('created_at', 'desc')->get();
         $pembayarans = Pembayaran::with('transaksi.customer', 'transaksi.produk')->orderBy('created_at', 'desc')->get();
 
         return view('backend.v_pembayaran.index', compact('transaksis', 'pembayarans'));
@@ -37,7 +37,7 @@ class PembayaranController extends Controller
             'transaksi_id' => $request->transaksi_id,
             'jumlah_bayar' => $request->jumlah_bayar,
             'kembalian' => $kembalian >= 0 ? $kembalian : null,
-            'user_id'=> Auth::id(),
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil disimpan');
@@ -64,5 +64,11 @@ class PembayaranController extends Controller
         ]);
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil diupdate');
+    }
+
+    public function show($id)
+    {
+        $pembayaran = Pembayaran::with('transaksi.customer', 'transaksi.produk', 'user')->findOrFail($id);
+        return view('backend.v_pembayaran.show', compact('pembayaran'));
     }
 }

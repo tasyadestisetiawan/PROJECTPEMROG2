@@ -125,6 +125,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        if ($user->transaksi()->exists()) {
+            return redirect('/user')->with('error', 'User tidak dapat dihapus karena sudah terkait dengan transaksi.');
+        }
         $user->delete();
         return redirect('/user')->with('msgSuccess', 'Data berhasil dihapus');
     }
@@ -151,6 +154,6 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile')->with('success', 'Update Profil Berhasil');
+        return redirect()->route('home')->with('success', 'Update Profil Berhasil');
     }
 }
